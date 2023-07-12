@@ -1,5 +1,6 @@
 <?php
 include('includes/connect.php');
+include('functions/common_functions.php')
 
 ?>
 
@@ -83,45 +84,15 @@ include('includes/connect.php');
 
 <!-- fourth child -->
 <div class="row">
-    <div class="col-md-10">
+  <div class="col-md-10">
         <!-- products -->
-     <div class="row">
-        <div class="col-md-4 mb-2">
-        <div class="card" style="width: 18rem;">
-        <img src="./images/banana.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Add to Cart </a>
-            <a href="#" class="btn btn-secondary">View more </a>
-        </div>
-    </div>
-        </div>
-        <div class="col-md-4 mb-2"><div class="card" style="width: 18rem;">
-  <img src="./images/banana.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View more </a>
+    <div class="row">     
+<?php
+ global $con;
+getproducts();
+getuniquecategory();
+?>  
   </div>
-</div>
-
-</div>
-        <div class="col-md-4 mb-2">
-            <div class="card" style="width: 18rem;">
-  <img src="./images/banana.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to Cart</a>
-    <a href="#" class="btn btn-secondary">View more </a>
-  </div>
-</div>
-        </div>
-     </div>
-
-
     </div>
     <div class="col-md-2 bg-secondary p-0"> 
         <!-- brands to be displayed -->
@@ -131,18 +102,9 @@ include('includes/connect.php');
             </li>
 
  <?php
-$select_brand="Select * from `brands`";
-$result_brand=mysqli_query($con,$select_brand);
-// $row_data=mysqli_fetch_assoc($result_brand);
-// echo $row_data['brand_title'];
-// echo $row_data['brand_title'];
-while($row_data=mysqli_fetch_assoc($result_brand)){
-  $brand_title=$row_data['brand_title'];
-  $brand_id=$row_data['brands_id'];
-  echo " <li class='nav-item'> 
-  <a href='index.php?brand=$brand_id' class='nav-link text-light'>$brand_title</a>
-</li>";
-};
+ global $con;
+getbrands();
+ 
  ?>
         </ul> 
         <!-- categories to be displayed -->
@@ -153,19 +115,13 @@ while($row_data=mysqli_fetch_assoc($result_brand)){
 
             
 <?php
-$select_cat="Select * from `categories`"; //select database tables
-$resultcat = mysqli_query($con, $select_cat); //connect connection string and db tables
-while($datafetch= mysqli_fetch_assoc($resultcat)) {
- $cat_id = $datafetch['category_id'];
- $cat_title = $datafetch['category_title'];
-echo "    <li class='nav-item'> 
-<a href='index.php?category=$cat_id' class='nav-link text-light'>$cat_title</a>
-</li>";
-}
+global $con;
+getcategory();
 ?>
          
         </ul> 
     </div>
+</div>
 </div>
 
 
