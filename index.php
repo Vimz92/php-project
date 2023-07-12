@@ -1,3 +1,9 @@
+<?php
+include('includes/connect.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,42 +129,41 @@
             <li class="nav-item"> 
                 <a href="#" class="nav-link text-light bg-info"><h4> Delivery Brands </h4></a>
             </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Brand1</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Brand2</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Brand3</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Brand4</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Brand5</a>
-            </li>
+
+ <?php
+$select_brand="Select * from `brands`";
+$result_brand=mysqli_query($con,$select_brand);
+// $row_data=mysqli_fetch_assoc($result_brand);
+// echo $row_data['brand_title'];
+// echo $row_data['brand_title'];
+while($row_data=mysqli_fetch_assoc($result_brand)){
+  $brand_title=$row_data['brand_title'];
+  $brand_id=$row_data['brands_id'];
+  echo " <li class='nav-item'> 
+  <a href='index.php?brand=$brand_id' class='nav-link text-light'>$brand_title</a>
+</li>";
+};
+ ?>
         </ul> 
         <!-- categories to be displayed -->
         <ul class="navbar-nav me-auto text-center">
             <li class="nav-item"> 
                 <a href="#" class="nav-link text-light bg-info"><h4> Categories </h4></a>
             </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Categories1</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Categories2</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Categories3</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Categories4</a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link text-light">Categories5</a>
-            </li>
+
+            
+<?php
+$select_cat="Select * from `categories`"; //select database tables
+$resultcat = mysqli_query($con, $select_cat); //connect connection string and db tables
+while($datafetch= mysqli_fetch_assoc($resultcat)) {
+ $cat_id = $datafetch['category_id'];
+ $cat_title = $datafetch['category_title'];
+echo "    <li class='nav-item'> 
+<a href='index.php?category=$cat_id' class='nav-link text-light'>$cat_title</a>
+</li>";
+}
+?>
+         
         </ul> 
     </div>
 </div>
